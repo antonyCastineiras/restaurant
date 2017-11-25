@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<form id="form" action="/restaurants" method="post">
+		<input type="hidden" name="lng">
+		<input type="hidden" name="lat">
+		<input type="text" name="postcode">
+		<button type="submit">Submit</button>
+	</form>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script>
+		$(document).ready(function() {
+
+			$('#form').submit(function(event) {
+				event.preventDefault();
+				window.navigator.geolocation.getCurrentPosition(function(position) {
+					$('input[name="lat"]').val(position.coords.latitude)
+					$('input[name="lng"]').val(position.coords.longitude)
+					event.target.submit()
+				})
+			})
+
+		});
+	</script>
+</body>
+</html>
